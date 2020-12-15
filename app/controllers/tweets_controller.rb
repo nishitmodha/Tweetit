@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -67,6 +67,15 @@ class TweetsController < ApplicationController
   def correct_user
     @tweet = current_user.tweets.find_by(id: params[:id])
     redirect_to tweets_path, notice: "Not Authorised to edit this tweet" if @tweet.nil?
+  end
+
+  def like
+    if @tweet.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
+    end
   end
 
   private

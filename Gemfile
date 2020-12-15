@@ -29,6 +29,7 @@ gem 'bulma-rails', '~> 0.9.1'
 gem 'simple_form', '~> 5.0', '>= 5.0.3'
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'acts_as_votable', '~> 0.12.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
