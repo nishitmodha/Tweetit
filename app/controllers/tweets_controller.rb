@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /tweets
   # GET /tweets.json
@@ -61,6 +62,11 @@ class TweetsController < ApplicationController
       format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+    @tweet = current_user.tweets.find_by(id: params[:id])
+    redirect_to tweets_path, notice: "Not Authorised to edit this tweet" if @tweet.nil?
   end
 
   private
