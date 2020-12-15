@@ -7,9 +7,13 @@ module TweetsHelper
       end
 
       def liked_tweet(tweet)
-        return 'fa fa-heart' if current_user.voted_for? tweet
-        'fa fa-heart-o'
+        if current_user.voted_for? tweet
+            return 'fa fa-heart'
+        else
+            'fa fa-heart-o'
+        end
       end
+
     
       private
 

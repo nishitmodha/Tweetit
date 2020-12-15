@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :tweets do
     member do
       get 'like'
+      get 'unlike'
     end
   end
 

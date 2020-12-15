@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -71,6 +71,15 @@ class TweetsController < ApplicationController
 
   def like
     if @tweet.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
+    end
+  end
+
+  def unlike
+    if @tweet.unliked_by current_user
       respond_to do |format|
         format.html { redirect_to root_path }
         format.js
