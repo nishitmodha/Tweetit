@@ -31,10 +31,9 @@
 			  <% if tweet.user_id == current_user.id %>
               <nav class="level">
   				<div class="level-right is-mobile">
-
 				  	<%  if current_user.voted_for? tweet %>
 						<%= link_to unlike_tweet_path(tweet.id), class: "level-item", id: "like_#{tweet.id}" do %>
-  					  		<span class="icon"><i class="<%= liked_tweet tweet %>" aria-hidden="true"></i></span>
+  					  		<span class="icon has-text-danger"><i class="<%= liked_tweet tweet %>" aria-hidden="true"></i></span>
   						<% end %>
 					<% else %>
 						<%= link_to like_tweet_path(tweet.id), class: "level-item", id: "like_#{tweet.id}" do %>
@@ -54,9 +53,15 @@
   					<% end %>
   				</div>
 				  <% else %>
-					<%= link_to like_tweet_path(tweet.id),id: "like_#{tweet.id}"  do %>
-  					  <span class="icon"><i class="<%= liked_tweet tweet %>" aria-hidden="true"></i></span>
-  					<% end %>
+				  	<%  if current_user.voted_for? tweet %>
+						<%= link_to unlike_tweet_path(tweet.id), id: "like_#{tweet.id}" do %>
+  					  		<span class="icon has-text-danger"><i class="<%= liked_tweet tweet %>" aria-hidden="true"></i></span>
+  						<% end %>
+					<% else %>
+						<%= link_to like_tweet_path(tweet.id), id: "like_#{tweet.id}" do %>
+  					  		<span class="icon"><i class="<%= liked_tweet tweet %>" aria-hidden="true"></i></span>
+  						<% end %>
+					<% end %>
   			</nav>
 			  <% end %>
         </div>
