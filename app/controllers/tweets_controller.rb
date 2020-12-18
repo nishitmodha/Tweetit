@@ -6,7 +6,11 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all.order("created_at DESC")
+    if user_signed_in?
+      @tweets = Tweet.of_followed_users(current_user.following).order('created_at DESC') if user_signed_in?
+    else
+      @tweets = Tweet.all.order("created_at DESC")
+    end
     @tweet = Tweet.new
   end
 
