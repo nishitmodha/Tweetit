@@ -1,56 +1,7 @@
-<div class="column is-one-quarter">
+<div class="column">
 	<nav class="panel">
-		<p class="panel-heading">Profile</p>
-		<div class="panel-block">
-			<article class="media">
-				<div class="media-left">
-					<figure class="image is-64x64">
-						<%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
-					</figure>
-				</div>
-				<div class="media-content">
-					<div class="content">
-						<p>	
-							<strong><%= link_to @user.name, profile_path(@user.username) %></strong><br />
-							<small><%= link_to @user.username, profile_path(@user.username) %></small>
-
-							 <% if @user != current_user %>
-								<% if current_user_is_following(current_user.id, @user.id ) %>
-									<%= link_to 'Following', unfollow_user_path, class: 'button is-info', id: 'unfollow-button', method: :post %>
-								<% else %>
-									<%= link_to 'Follow', follow_user_path, class: 'button is-info', id: 'unfollow-button', method: :post %>
-								<% end %>
-							<% end %>
-						
-						</p>
-					</div>
-				</div>
-			</article>
-		</div>
-		<div class="panel-block">
-			<div class="level is-mobile">
-				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Tweets</p>
-						<p class="title is-6"><%= @user.tweets.count %></p>
-					</div>
-				</div>
-				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Following</p>
-						<p class="title is-6"><%= @user.following.count %></p>
-					</div>
-				</div>
-					<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Followers</p>
-						<p class="title is-6"><%= @user.followers.count %></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-</div>
+		<p class="panel-heading">Browse all Tweets</p>
+	
 
 
 <% @tweets.each do |tweet| %>
@@ -63,8 +14,11 @@
   		</div>
   		<div class="media-content">
   			<div class="content">
-  				<strong> <%= tweet.user.name %>  </strong><br />
-  				<small> @<%= tweet.user.username %> </small><br/>
+  				
+				<strong><%= link_to tweet.user.name, profile_path(tweet.user.username) %></strong><br />
+				<small><%= link_to tweet.user.username, profile_path(tweet.user.username) %></small>
+				
+  				
   				<p><%= tweet.tweet %></p>
 				  <%= display_likes tweet %>
   			</div>

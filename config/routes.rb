@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post ':username/follow_user', to: 'relationships#follow_user', as: :follow_user
   post ':username/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
 
-
+get 'tweets/browse'
   get 'profiles/show'
   devise_for :users, :controllers => { registrations: 'registrations'}
   resources :tweets do
